@@ -7,12 +7,10 @@ import ru.levelup.studentdb.model.Student;
 import ru.levelup.studentdb.service.DaoService;
 import ru.levelup.studentdb.service.StudentsService;
 
-import java.util.List;
-
-@Component("saveAction")
+@Component("loadAction")
 @Scope("prototype")
 @RequiredArgsConstructor
-public class SaveAction implements Action {
+public class LoadAction implements Action {
 
     private final StudentsService studentsService;
     private final DaoService<Student> studentDaoService;
@@ -24,11 +22,6 @@ public class SaveAction implements Action {
 
     @Override
     public void execute() {
-        List<Student> allStudents = studentsService.findAll();
-        allStudents.forEach(student -> {
-            studentDaoService.save(student);
-        });
-
-        System.out.println("Save DB");
+        studentDaoService.findAll().forEach(studentsService::save);
     }
 }
