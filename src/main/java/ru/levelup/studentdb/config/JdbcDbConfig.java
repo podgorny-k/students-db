@@ -2,7 +2,6 @@ package ru.levelup.studentdb.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -10,9 +9,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
-@Configuration
+//@Configuration
 //@EnableTransactionManagement
-public class DbConfig {
+public class JdbcDbConfig {
 
     @Value("${db.driver}")
     private String driver;
@@ -47,13 +46,4 @@ public class DbConfig {
         return new NamedParameterJdbcTemplate(dataSource);
     }
 
-//    @Bean
-//    public EntityManagerFactory entityManagerFactory() {
-//        return Persistence.createEntityManagerFactory("MainUnit");
-//    }
-//
-//    @Bean
-//    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
-//        return new JpaTransactionManager(emf);
-//    }
 }

@@ -34,7 +34,7 @@ public class CommandProcessorImpl implements CommandProcessor, ApplicationContex
         if (actionObject instanceof Action) {
             Action action = (Action) actionObject;
             if (args.length > 1) {
-                action.setParams(Arrays.copyOfRange(args, 1, args.length));
+                action.setParams(Arrays.copyOfRange(args, 0, args.length));
             }
             action.execute();
         } else {

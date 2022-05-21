@@ -7,16 +7,17 @@ import ru.levelup.studentdb.model.Student;
 import ru.levelup.studentdb.service.DaoService;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
-@Repository
+//@Repository
 @RequiredArgsConstructor
 public class StudentsJdbcDaoImpl implements DaoService<Student> {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public void save(Student student) {
+    public Student save(Student student) {
         String insertSql = "insert into edu_schema.students (firstname, lastname) values (:firstname, :lastname)";
         String updateSql = "update edu_schema.students set firstname = :firstname, lastname = :lastname where id = :id";
 
@@ -41,15 +42,17 @@ public class StudentsJdbcDaoImpl implements DaoService<Student> {
 //                    ps.setLong(3, student.getId());
 //                });
         }
+        return null;
     }
 
     @Override
     public Collection<Student> findAll() {
         String sql = "select id, firstname, lastname from edu_schema.students";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new Student(
-                rs.getLong(1),
-                rs.getString(2),
-                rs.getString(3)
-        ));
+//        return jdbcTemplate.query(sql, (rs, rowNum) -> new Student(
+//                rs.getLong(1),
+//                rs.getString(2),
+//                rs.getString(3)
+//        ));
+        return Collections.emptyList();
     }
 }
