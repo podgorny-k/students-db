@@ -27,9 +27,8 @@ public class SaveAction implements Action {
         List<Student> allStudents = studentsService.findAll();
         allStudents.forEach(student -> {
             Student s = studentDaoService.save(student);
-            s.setLastName("Changed lastname");
         });
 
-        System.out.println("Save DB");
+        System.out.println("Saved to DB");
     }
 }

@@ -1,28 +1,27 @@
 package ru.levelup.studentdb.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.levelup.studentdb.model.Group;
 import ru.levelup.studentdb.model.Student;
-import ru.levelup.studentdb.repo.StudentsRepo;
 import ru.levelup.studentdb.service.DaoService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Repository
-public class StudentsJpaDaoImpl implements DaoService<Student> {
+//@RequiredArgsConstructor
+public class GroupJpaDaoImpl implements DaoService<Group> {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
     @Transactional
-    public Student save(Student data) {
+    public Group save(Group data) {
         if (data.getId() == null) {
             em.persist(data);
             return data;
@@ -32,8 +31,9 @@ public class StudentsJpaDaoImpl implements DaoService<Student> {
     }
 
     @Override
-    public Collection<Student> findAll() {
-        Query query = em.createQuery("select s from Student s");
+    public Collection<Group> findAll() {
+        Query query = em.createQuery("select g from Group g");
         return query.getResultList();
     }
+
 }

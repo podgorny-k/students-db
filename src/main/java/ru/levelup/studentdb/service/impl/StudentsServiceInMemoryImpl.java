@@ -11,6 +11,7 @@ import ru.levelup.studentdb.service.StudentsService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentsServiceInMemoryImpl implements StudentsService {
@@ -22,11 +23,23 @@ public class StudentsServiceInMemoryImpl implements StudentsService {
     @Override
     public void save(Student student) {
         counter++;
-        students.add(student);
+
+        findByFirstAndLastName(student.getFirstName(), student.getLastName()).ifPresentOrElse(
+                s -> System.out.println("Student " + student.getFirstName() + " " + student.getLastName() + " already exists"),
+                () -> students.add(student)
+        );
     }
 
     @Override
     public List<Student> findAll() {
         return Collections.unmodifiableList(students);
+    }
+
+    @Override
+    public Optional<Student> findByFirstAndLastName(String firstName, String lastName) {
+        return students.stream()
+                .filter(student -> student.getFirstName().equals(firstName))
+                .filter(student -> student.getLastName().equals(lastName))
+                .findFirst();
     }
 }

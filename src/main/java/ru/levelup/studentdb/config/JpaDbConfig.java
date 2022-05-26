@@ -2,6 +2,7 @@ package ru.levelup.studentdb.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -23,8 +24,4 @@ public class JpaDbConfig {
         return new JpaTransactionManager(emf);
     }
 
-    @Bean
-    public EntityManager entityManager(EntityManagerFactory emf) {
-        return emf.createEntityManager();
-    }
 }

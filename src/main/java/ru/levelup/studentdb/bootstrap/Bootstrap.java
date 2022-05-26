@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+import static java.util.Optional.ofNullable;
+
 @Component
 @RequiredArgsConstructor
 public class Bootstrap implements CommandLineRunner {
@@ -18,7 +20,6 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Please, enter command");
-        System.out.print(">");
 
         // create student FirstName LastName
         // list students
@@ -32,8 +33,20 @@ public class Bootstrap implements CommandLineRunner {
         String line;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        while (!(line = reader.readLine()).equals("exit")) {
-            String[] tokens = line.split(" ");
+        processor.process("load");
+
+        while (true) {
+            System.out.print(">");
+            line = reader.readLine();
+            if (line == null || "exit".equals(line.trim())) {
+                break;
+            }
+
+            String commandLine = line.trim();
+            if (commandLine.isEmpty()) {
+                continue;
+            }
+            String[] tokens = commandLine.split(" ");
             processor.process(tokens[0], Arrays.copyOfRange(tokens, 1, tokens.length));
         }
 

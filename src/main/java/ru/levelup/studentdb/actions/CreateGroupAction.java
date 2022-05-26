@@ -5,29 +5,27 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.levelup.studentdb.model.Group;
 import ru.levelup.studentdb.model.Student;
-import ru.levelup.studentdb.service.DaoService;
 import ru.levelup.studentdb.service.GroupService;
 import ru.levelup.studentdb.service.StudentsService;
 
-@Component("loadAction")
+@Component("createGroupAction")
 @Scope("prototype")
 @RequiredArgsConstructor
-public class LoadAction implements Action {
+public class CreateGroupAction implements Action {
 
-    private final StudentsService studentsService;
+    private String groupName;
+
     private final GroupService groupService;
-
-    private final DaoService<Student> studentDaoService;
-    private final DaoService<Group> groupDaoService;
 
     @Override
     public void setParams(String... param) {
-
+        this.groupName = param[0];
     }
 
     @Override
     public void execute() {
-        studentDaoService.findAll().forEach(studentsService::save);
-        groupDaoService.findAll().forEach(groupService::save);
+        Group group = new Group(groupName);
+        groupService.save(group);
     }
+
 }
