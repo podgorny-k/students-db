@@ -20,7 +20,7 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
     private List<Student> students = new ArrayList<>();
 
     public Group(String groupName) {

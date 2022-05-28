@@ -23,7 +23,7 @@ public class Student {
     @Column(name = "lastname")
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id")
     private Group group;
 

@@ -3,3 +3,10 @@ db:
   url: jdbc:postgresql://localhost:5432/students
   user: dev
   password: dev
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/students
+    driver-class-name: org.postgresql.Driver
+    username: dev
+    password: dev
