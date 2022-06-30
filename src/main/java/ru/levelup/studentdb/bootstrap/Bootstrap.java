@@ -15,29 +15,21 @@ public class Bootstrap implements CommandLineRunner {
 
     private final CommandProcessor processor;
 
+    public static final String SPACE = " ";
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Please, enter command");
         System.out.print(">");
 
-        // create student FirstName LastName
-        // list students
-
-        // create group GroupName
-        // list groups
-
-        // save
-        // load
-
         String line;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (!(line = reader.readLine()).equals("exit")) {
-            String[] tokens = line.split(" ");
-            processor.process(tokens[0], Arrays.copyOfRange(tokens, 1, tokens.length));
+            String[] tokens = line.split(SPACE);
+            if (tokens.length < 2) System.out.println("Minimum number of arguments: 2");
+            else processor.process(tokens[0], tokens[1], Arrays.copyOfRange(tokens, 1, tokens.length));
         }
-
         System.out.println();
     }
-
 }

@@ -3,12 +3,12 @@ package ru.levelup.studentdb.actions;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component("saveAction")
+@Component("save dbAction")
 @Scope("prototype")
 public class SaveAction implements Action {
+
     @Override
     public void setParams(String... param) {
-
     }
 
     @Override
