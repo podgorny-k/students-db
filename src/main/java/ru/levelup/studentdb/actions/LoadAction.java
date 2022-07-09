@@ -9,17 +9,15 @@ import ru.levelup.studentdb.service.DaoService;
 import ru.levelup.studentdb.service.GroupsService;
 import ru.levelup.studentdb.service.StudentsService;
 
-import java.util.List;
-
-@Component("save dbAction")
+@Component("load dbAction")
 @Scope("prototype")
 @RequiredArgsConstructor
-public class SaveAction implements Action {
+public class LoadAction implements Action {
 
     private final DaoService<Student> studentDaoService;
     private final DaoService<Group> groupDaoService;
     private final StudentsService studentsService;
-    private final GroupsService groupService;
+    private final GroupsService groupsService;
 
     @Override
     public void setParams(String... param) {
@@ -27,12 +25,7 @@ public class SaveAction implements Action {
 
     @Override
     public void execute() {
-        List<Student> allStudents = studentsService.findAll();
-        allStudents.forEach(studentDaoService::save);
-
-        List<Group> allGroups = groupService.findAll();
-        allGroups.forEach(groupDaoService::save);
-
-        System.out.println("Save DB");
+        studentDaoService.findAll().forEach(studentsService::save);
+        groupDaoService.findAll().forEach(groupsService::save);
     }
 }
