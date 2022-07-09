@@ -29,12 +29,7 @@ public class ListGroupsAction implements Action {
         } else {
             AtomicInteger index = new AtomicInteger(1);
             System.out.println("List of groups:");
-            if (groups.stream().anyMatch(group -> group.getStudents().isEmpty())) {
-                groups.forEach(group -> System.out.println(index.getAndIncrement() + ". " + group.getName()));
-            } else {
-                groups.forEach(group -> System.out.println(index.getAndIncrement() + ". " + group.getName()
-                        + ". Students: " + group.getFullNamesStudents()));
-            }
+            groups.forEach(group -> System.out.println(index.getAndIncrement() + ". " + group.getName()));
         }
     }
 }
